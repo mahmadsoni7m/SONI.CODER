@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Center — SONI.CODER</title>
+<meta name="description" content="Download SONI.CODER Android apps and tools, pulled straight from GitHub Releases.">
+<meta name="theme-color" content="#050810">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="navbar">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="brand-mark">S</span>SONI.CODER</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="apps.html" aria-current="page">Apps</a>
+      <a href="projects.html?category=web">Web</a>
+      <a href="projects.html?category=bot">Bots</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" data-theme-toggle aria-label="Switch to light mode"></button>
+      <a class="btn btn-primary btn-sm" href="apps.html">Download</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-header">
+    <div class="container">
+      <h1>Download Center</h1>
+      <p>APKs and tools, released straight from GitHub. Downloads point to GitHub Releases — nothing is hosted on this site.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="toolbar">
+        <div class="filters" id="apps-filter-root">
+          <button class="filter-btn" data-filter="ALL" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="ANDROID" aria-pressed="false">Android Apps</button>
+          <button class="filter-btn" data-filter="TOOL" aria-pressed="false">Tools</button>
+        </div>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <label class="sr-only" for="apps-search">Search downloads</label>
+          <input type="search" id="apps-search" placeholder="Search downloads...">
+        </div>
+      </div>
+      <div class="grid" id="apps-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark">S</span>SONI.CODER</a>
+        <p class="text-muted" style="margin-top:10px; max-width:36ch;">Building ideas into real products.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="https://github.com/mahmadsoni7m" data-config-href="githubUrl" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://instagram.com/soni.coder" data-config-href="instagram" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" data-config-href="telegram" target="_blank" rel="noopener">Telegram</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> SONI.CODER</span>
+      <span>Built with HTML, CSS &amp; JavaScript.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="data/projects.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Download Center only lists downloadable categories.
+    const downloadable = window.SoniProjects.all().filter((p) => p.category === "Android" || p.category === "Tool");
+    const grid = document.getElementById("apps-grid");
+
+    window.SoniProjects.initToolbar({
+      container: grid,
+      filterRoot: document.getElementById("apps-filter-root"),
+      searchInput: document.getElementById("apps-search"),
+      projects: downloadable,
+      emptyTitle: "No downloads found.",
+      emptyHint: "No apps match your search.",
+    });
+
+    const observer = new MutationObserver(() => window.SoniApp && window.SoniApp.refreshReveal());
+    observer.observe(grid, { childList: true });
+  });
+</script>
+</body>
+</html>

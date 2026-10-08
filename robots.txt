@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mahmadsoni7m.github.io/SONI.CODER/sitemap.xml

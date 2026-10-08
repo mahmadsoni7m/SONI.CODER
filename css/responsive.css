@@ -1,0 +1,74 @@
+/* =========================================================
+   SONI.CODER — Responsive Rules
+   Mobile-first overrides for tablet/desktop breakpoints.
+   Base styles in style.css already target small screens.
+   ========================================================= */
+
+/* --- Base (phones): stack everything --- */
+.grid { grid-template-columns: 1fr; }
+.hero-stats { grid-template-columns: repeat(2, 1fr); }
+.about-grid { grid-template-columns: 1fr; gap: 32px; }
+.tech-grid { grid-template-columns: repeat(3, 1fr); }
+.detail-body { grid-template-columns: 1fr; }
+.screens-grid { grid-template-columns: 1fr; }
+
+.nav-links { display: none; }
+.nav-toggle { display: flex; }
+
+.nav-links.is-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 68px;
+  left: 0; right: 0;
+  background: rgba(6, 10, 20, 0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px 26px;
+  gap: 6px;
+  animation: dropIn 0.22s ease;
+}
+[data-theme="light"] .nav-links.is-open { background: #ffffff; }
+.nav-links.is-open a { padding: 10px 0; font-size: 1rem; }
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.band { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+.footer-top { flex-direction: column; }
+
+/* --- Small tablets (≥600px) --- */
+@media (min-width: 600px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .tech-grid { grid-template-columns: repeat(4, 1fr); }
+  .screens-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Tablets / small laptops (≥860px) --- */
+@media (min-width: 860px) {
+  .nav-links { display: flex; }
+  .nav-toggle { display: none; }
+  .nav-links.is-open { position: static; flex-direction: row; padding: 0; background: none; border: 0; animation: none; }
+
+  .about-grid { grid-template-columns: 1.1fr 1fr; }
+  .detail-body { grid-template-columns: 2fr 1fr; }
+}
+
+/* --- Desktop (≥1000px) --- */
+@media (min-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .tech-grid { grid-template-columns: repeat(5, 1fr); }
+  .screens-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero-stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --- Large desktop (≥1300px): a touch more breathing room --- */
+@media (min-width: 1300px) {
+  .container { padding-inline: 32px; }
+}
+
+/* --- Fine pointer only: keep hover-only affordances off touchscreens --- */
+@media (hover: none) {
+  .card:hover { transform: none; }
+}
